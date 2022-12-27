@@ -50,12 +50,22 @@
                       <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>My Boards</b>
                     </nuxt-link>
                   </div>
+
+                  <div class="d-flex">
+                    <nuxt-link to="/reports">
+                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Reports</b>
+                    </nuxt-link>
+                  </div>
+
                   <div class="d-flex">
                     <nuxt-link to="/auth/signout">
                       <v-icon>mdi-exit-to-app</v-icon>&nbsp;&nbsp;<b>Sign out</b>
                     </nuxt-link>
                   </div>
                 </div>
+
+              
+                  
               </v-container>
           </v-navigation-drawer>
         </div>
