@@ -28,7 +28,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/filters'
+    '@/plugins/filters',
+    '@/plugins/firebase'
   ],
   router: {
     middleware: ['auth']
@@ -61,6 +62,7 @@ export default {
           measurementId: "G-TF6B7YY14L"
         },
         services: {
+          Realtimedb: true,
           auth: {
             persistence: 'local', // default
             initialize: {
@@ -70,6 +72,7 @@ export default {
             ssr: false,
           },
           firestore: true,
+          
           storage: true
         }
       }
