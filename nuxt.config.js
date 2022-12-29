@@ -60,7 +60,7 @@ export default {
           messagingSenderId: "72331695996",
           appId: "1:72331695996:web:aabeaf0a47becf1bc1b6f9",
           measurementId: "G-TF6B7YY14L"
-        },
+      },
         services: {
           Realtimedb: true,
           auth: {

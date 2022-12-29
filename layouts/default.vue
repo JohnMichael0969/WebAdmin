@@ -50,11 +50,21 @@
                       <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>My Boards</b>
                     </nuxt-link>
                   </div>
-
+                    <div class="d-flex">
+                      <nuxt-link to="/users">
+                       <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>User</b>
+                      </nuxt-link> <br>
+                    </div>
+                      
+                    <div class="d-flex">
+                      <nuxt-link to="/campaignlist">
+                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Campaign</b>
+                      </nuxt-link><br>
+                    </div>
                   <div class="d-flex">
-                    <nuxt-link to="/reports">
-                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Reports</b>
-                    </nuxt-link>
+                      <nuxt-link to="/donationlist">
+                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Donation</b>
+                      </nuxt-link>
                   </div>
 
                   <div class="d-flex">

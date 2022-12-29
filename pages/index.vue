@@ -38,9 +38,8 @@
               }');height:150px;background-size: cover;background-position: center;`"
             >
               <template
-                v-if="!fileToUpload.progress || fileToUpload.progress == 0"
-              >
-                <v-icon>mdi-camera</v-icon>
+                v-if="!fileToUpload.progress || fileToUpload.progress == 0"><!--Adding the board-->
+                <v-icon>mdi-camera</v-icon><!--Add Background Image-->
                 <p>Add a board background</p>
                 <input
                   type="file"
@@ -52,7 +51,7 @@
                   @click="onFileClicked($event)"
                   @change="onFileSelected($event)"
                   style="display: none"
-                />
+                /><!--End bg image-->
               </template>
               <template
                 v-else-if="
@@ -66,7 +65,7 @@
                     indeterminate
                   ></v-progress-circular>
                 </div>
-              </template>
+              </template><!--End-->
             </div>
             <v-btn :disabled="!valid" color="primary" @click="createBoard"
               >Submit</v-btn
