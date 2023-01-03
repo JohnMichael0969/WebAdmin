@@ -28,10 +28,12 @@ const state = () => ({
   user: null,
 })
 
-const getters = {
+export const getters = {
+  
   getUser(state) {
     return state.user
   },
+  Persons: state => state.Persons 
 }
 
 export default {

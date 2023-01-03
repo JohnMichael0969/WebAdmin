@@ -1,39 +1,56 @@
 <template>
-  <div id="wrapper">
-    <div id="content-wrapper" class="d-flex flex-column">
-      <div id="content">
-        <div class="container-fluid container">
-          <h3 class="text-dark mb-1" style="text-align: center;font-family: Biryani, sans-serif;font-weight: bold;padding: 9px;margin: 5px;">
-                  Donations List
-                </h3>
-        </div>
-         <v-data-table :headers="headers" :items="items" />
-      </div>
-     </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title>Donations List</v-card-title>
+          <v-card-text>
+            <v-list>
+              <v-list-item v-for="item in items" :key="item.id">
+                {{ item.name }}
+              </v-list-item>
+            </v-list>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/database'
+
 export default {
   data() {
     return {
-      headers: [
-        { text: 'Schedule', value: '' },
-        { text: 'Title', value: '' },
-        { text: 'Food Prepeared', value: '' },
-        { text: 'Food Expiry', value: '' },
-        { text: 'Description', value: '' },
-        { text: 'Date', value: '' },
-        { text: 'Address', value: '' }
-        
-      ],
-      items: [
-        { name: 'John', email: 'john@example.com', age: 30 },
-        { name: 'Jane', email: 'jane@example.com', age: 25 },
-        { name: 'Bob', email: 'bob@example.com', age: 35 }
-      ]
+      items: []
+    }
+  },
+  mounted() {
+    // Connect to the database
+    const db = firebase.database()
+
+    // Write a query to retrieve the data
+    const ref = db.ref('items')
+
+    // Execute the query and process the data
+    ref.once('value')
+      .then(snapshot => {
+        const data = snapshot.val()
+        this.items = data
+      })
+  },
+  watch: {
+    items: {
+      handler(newValue) {
+        // Update the data in the database
+        const db = firebase.database()
+        const ref = db.ref('items')
+        ref.update(newValue)
+      },
+      deep: true
     }
   }
 }
 </script>
-

@@ -1,33 +1,40 @@
 <template>
-  <div id="wrapper">
-    <div id="content-wrapper" class="d-flex flex-column">
-      <div id="content">
-        <div class="container-fluid container">
-          <h3 class="text-dark mb-1" style="text-align: center;font-family: Biryani, sans-serif;font-weight: bold;padding: 9px;margin: 5px;">
-                  Users List
-                </h3>
-        </div>
-         <v-data-table :headers="headers" :items="items" />
-      </div>
-     </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title>Donations List</v-card-title>
+          <v-card-text>
+            <v-list>
+              <v-list-item v-for="(Donations, index) in Donations" :key="index">
+                <v-list-item-title>{{ Donations.Title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ Donations.Description }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Donations.Date  }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Donations.Address }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Donations.FoodExpiry }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Donations.FoodPrepared }}</v-list-item-subtitle>
+              </v-list-item>
+            </v-list>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+import { database } from '~/plugins/firebase'
+
 export default {
   data() {
     return {
-      headers: [//mao ning naas babaw sa table
-        { text: 'Name', value: 'name' },
-        { text: 'Email', value: 'email' },
-        { text: 'Age', value: 'age' }
-      ],
-      items: [// mao ni sud sa table
-        { name: 'John', email: 'john@example.com', age: 30 },
-        { name: 'Jane', email: 'jane@example.com', age: 25 },
-        { name: 'Bob', email: 'bob@example.com', age: 35 }
-      ]
+      Donations: []
     }
+  },
+  created() {
+    database.ref('Donations').on('value', snapshot => {
+      this.Donations = snapshot.val()
+    })
   }
 }
 </script>

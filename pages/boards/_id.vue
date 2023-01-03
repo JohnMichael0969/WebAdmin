@@ -464,7 +464,7 @@ export default {
   overflow: scroll;
   .list {
     min-width: 250px;
-    background-color: rgb(228 228 228 / 35%);
+    background-color: rgb(25 90 231 / 35%);
     padding: 25px;
     border-radius: 12px;
     min-height: 70vh;
@@ -481,7 +481,7 @@ export default {
     font-size: 24px;
   }
   .jello-topbar {
-    background-color: rgb(255, 255, 255, 0);
+    background-color: rgba(210, 231, 25, 0.979);
     padding: 0px !important;
   }
 }

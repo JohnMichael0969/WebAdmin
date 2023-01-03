@@ -29,7 +29,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/filters',
-    '@/plugins/firebase'
+    '@/plugins/firebase',
+    '~/plugins/firebase.js'
   ],
   router: {
     middleware: ['auth']
@@ -52,14 +53,14 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: "AIzaSyAXxg0shv7zheBNvBIBZAep70ifJC3hcVE",
-          authDomain: "dbadminweb.firebaseapp.com",
-          databaseURL: "https://dbadminweb-default-rtdb.firebaseio.com",
-          projectId: "dbadminweb",
-          storageBucket: "dbadminweb.appspot.com",
-          messagingSenderId: "72331695996",
-          appId: "1:72331695996:web:aabeaf0a47becf1bc1b6f9",
-          measurementId: "G-TF6B7YY14L"
+          apiKey: "AIzaSyBjhJxNHvKI449FL-hJalVfGNvFDdLWQ9A",
+          authDomain: "youcash-9427e.firebaseapp.com",
+          databaseURL: "https://youcash-9427e-default-rtdb.firebaseio.com",
+          projectId: "youcash-9427e",
+          storageBucket: "youcash-9427e.appspot.com",
+          messagingSenderId: "535401343041",
+          appId: "1:535401343041:web:48cbb643929c150d3dfec0",
+          measurementId: "G-ESC95M0448"
       },
         services: {
           Realtimedb: true,

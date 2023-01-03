@@ -1,34 +1,40 @@
 <template>
-  <div id="wrapper">
-    <div id="content-wrapper" class="d-flex flex-column">
-      <div id="content">
-        <div class="container-fluid container">
-          <h3 class="text-dark mb-1" style="text-align: center;font-family: Biryani, sans-serif;font-weight: bold;padding: 9px;margin: 5px;">
-                  Campaign List
-                </h3>
-        </div>
-         <v-data-table :headers="headers" :items="items" />
-      </div>
-     </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title>Campaign List</v-card-title>
+          <v-card-text>
+            <v-list>
+              <v-list-item v-for="(Campaigns, index) in Campaigns" :key="index">
+                <v-list-item-title>{{ Campaigns.Title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ Campaigns.Description }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Campaigns.Target }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Campaigns.Location }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Campaigns.DriveStart }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Campaigns.DriveEnd }}</v-list-item-subtitle>
+              </v-list-item>
+            </v-list>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import { database } from '~/plugins/firebase'
+
 export default {
   data() {
     return {
-      headers: [],
-      items: []
+      Campaigns: []
     }
   },
-  async asyncData({ $firebaseRef }) {
-    const PersonsRef = $firebaseRef('Persons')
-    const snapshot = await Persons.once('value')
-    return {
-      Persons: snapshot.val()
-    }
+  created() {
+    database.ref('Campaigns').on('value', snapshot => {
+      this.Campaigns = snapshot.val()
+    })
   }
 }
 </script>
-
