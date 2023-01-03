@@ -1,13 +1,26 @@
 <template>
   <v-container>
+    <h2>Donations List</h2>
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title>Donations List</v-card-title>
+          <v-card-title>
+            Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Food Expiry&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Food Prepared
+            </v-card-title>
           <v-card-text>
             <v-list>
-              <v-list-item v-for="item in items" :key="item.id">
-                {{ item.name }}
+              <v-list-item v-for="(Donations, index) in Donations" :key="index">
+                <v-list-item-title>Title{{ Donations.Title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ Donations.Description }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Donations.Date  }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Donations.Address }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Donations.FoodExpiry }}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ Donations.FoodPrepared }}</v-list-item-subtitle>
               </v-list-item>
             </v-list>
           </v-card-text>
@@ -18,39 +31,19 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
-import 'firebase/database'
+import { database } from '~/plugins/firebase'
 
 export default {
   data() {
     return {
-      items: []
+      Donations: []
     }
   },
-  mounted() {
-    // Connect to the database
-    const db = firebase.database()
-
-    // Write a query to retrieve the data
-    const ref = db.ref('items')
-
-    // Execute the query and process the data
-    ref.once('value')
-      .then(snapshot => {
-        const data = snapshot.val()
-        this.items = data
-      })
-  },
-  watch: {
-    items: {
-      handler(newValue) {
-        // Update the data in the database
-        const db = firebase.database()
-        const ref = db.ref('items')
-        ref.update(newValue)
-      },
-      deep: true
-    }
+  created() {
+    database.ref('Donations').on('value', snapshot => {
+      this.Donations = snapshot.val()
+    })
   }
 }
 </script>
+
