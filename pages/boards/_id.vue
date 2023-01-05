@@ -9,15 +9,52 @@
         : ''
     "
   >
-    <div class="d-block">
-      <v-container fluid class="jello-topbar">
+    <div>
+      <v-container class="jello-Topbar" fluid >
         <div class="d-flex justify-space-between">
           <v-icon @click="drawer = true">mdi-menu</v-icon>
-          <nuxt-link to="/">
-            <v-row no-gutters align="center" justify="space-between">
-              <h3 class="logo">Admin</h3>
+          <v-row no-gutters align="center" justify="center">
+                  <nuxt-link to="/">
+                    <v-row no-gutters align="Left" justify="center">
+                      <h3 class="logo">Dashboard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                    </v-row>
+                  </nuxt-link>
+                  <nuxt-link to="/notes">
+                    <v-row no-gutters align="Left" justify="center">
+                      <h3 class="logo">Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                    </v-row>
+                  </nuxt-link>
+                  <nuxt-link to="/users">
+            <v-row no-gutters align="left" justify="center">
+              <h3 class="logo">Users&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
             </v-row>
           </nuxt-link>
+          <nuxt-link to="/campaignlist">
+            <v-row no-gutters align="left" justify="Center">
+              <h3 class="logo">Campaigns&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            </v-row>
+          </nuxt-link>
+          <nuxt-link to="/donationlist">
+            <v-row no-gutters align="left" justify="Center">
+              <h3 class="logo">Donations&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            </v-row>
+          </nuxt-link>
+          <nuxt-link to="/notification">
+            <v-row no-gutters align="left" justify="Center">
+              <h3 class="logo">Delivery&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            </v-row>
+          </nuxt-link>
+
+          <nuxt-link to="/auth/signout">
+            <v-row no-gutters align="left" justify="Center">
+              <v-icon color="#e6d8bb">mdi-exit-to-app</v-icon>
+            </v-row>
+          </nuxt-link>
+          
+          
+
+                </v-row>
+
           <v-icon small @click="deleteBoard()">mdi-delete-outline</v-icon>
         </div>
       </v-container>
@@ -32,7 +69,7 @@
             <v-icon @click="drawer = false">mdi-close</v-icon>
 
             <v-row no-gutters align="center" justify="end">
-              <p class="jello-user">
+              <p class="jello-topbar">
                 Signed in as<br />
                 {{ $nuxt.$fire.auth.currentUser.email }}
               </p>
@@ -49,9 +86,33 @@
             <div class="d-flex">
               <nuxt-link to="/">
                 <v-icon>mdi-view-dashboard-variant-outline</v-icon
-                >&nbsp;&nbsp;<b>My Boards</b>
+                >&nbsp;&nbsp;<b>Notes</b>
               </nuxt-link>
-            </div>
+           </div>
+                    <div class="d-flex">
+                      <nuxt-link to="/donor">
+                       <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Donors</b>
+                      </nuxt-link> <br>
+                    </div>
+
+                    <div class="d-flex">
+                      <nuxt-link to="/beneficiary">
+                       <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>beneficiaries</b>
+                      </nuxt-link> <br>
+                    </div>
+                      
+                    <div class="d-flex">
+                      <nuxt-link to="/campaignlist">
+                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Campaign</b>
+                      </nuxt-link><br>
+                    </div>
+                  <div class="d-flex">
+                      <nuxt-link to="/donationlist">
+                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Donation</b>
+                      </nuxt-link>
+                  </div>
+
+
             <div class="d-flex">
               <nuxt-link to="/auth/signout">
                 <v-icon>mdi-exit-to-app</v-icon>&nbsp;&nbsp;<b>Sign out</b>
@@ -481,7 +542,7 @@ export default {
     font-size: 24px;
   }
   .jello-topbar {
-    background-color: rgba(210, 231, 25, 0.979);
+    background-color: rgba(17, 21, 235, 0.979);
     padding: 0px !important;
   }
 }

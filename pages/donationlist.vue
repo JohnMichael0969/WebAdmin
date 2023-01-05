@@ -1,49 +1,57 @@
 <template>
   <v-container>
-    <h2>Donations List</h2>
-    <v-row>
-      <v-col cols="12">
-        <v-card>
-          <v-card-title>
-            Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Food Expiry&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Food Prepared
-            </v-card-title>
-          <v-card-text>
-            <v-list>
-              <v-list-item v-for="(Donations, index) in Donations" :key="index">
-                <v-list-item-title>Title{{ Donations.Title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ Donations.Description }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Donations.Date  }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Donations.Address }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Donations.FoodExpiry }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Donations.FoodPrepared }}</v-list-item-subtitle>
-              </v-list-item>
-            </v-list>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <h2>Donation List</h2>
+    <v-data-table :items="Donation" :headers="headers" class="elevation-1">
+      <template v-slot:item.Title="{ item }">
+        {{ item.Title}}
+      </template>
+      <template v-slot:item.Description="{ item }">
+        {{ item.Description }}
+      </template>
+      <template v-slot:item.Location="{ item }">
+        {{ item.Location }}
+      </template>
+      <template v-slot:item.FoodType="{ item }">
+        {{ item.FoodType }}
+      </template>
+      <template v-slot:item.FoodExpiry="{ item }">
+        {{ item.FoodExpiry }}
+      </template>
+      
+      <template v-slot:item.PickUPDate="{ item }">
+        {{ item.PickUPDate }}
+      </template>
+      <template v-slot:item.TransportMethod="{ item }">
+        {{ item.TransportMethod }}
+      </template>
+
+
+    </v-data-table>
   </v-container>
 </template>
 
 <script>
-import { database } from '~/plugins/firebase'
+import firebase from '~/plugins/firebase'
 
 export default {
-  data() {
+  data () {
     return {
-      Donations: []
+      Donation: [],
+      headers: [
+        { text: 'Title', value: 'Title' },
+        { text: 'Description', value: 'Description' },       
+        { text: 'FoodType', value: 'FoodType' },
+        { text: 'FoodExpiry', value: 'FoodExpiry' },
+        { text: 'PickUPDate', value: 'PickUPDate' },
+        { text: 'TransportMethod', value: 'TransportMethod' },
+        
+      ]
     }
   },
-  created() {
-    database.ref('Donations').on('value', snapshot => {
-      this.Donations = snapshot.val()
+  created () {
+    firebase.database().ref('Donation').on('value', snapshot => {
+      this.Donation = Object.values(snapshot.val())
     })
   }
 }
 </script>
-

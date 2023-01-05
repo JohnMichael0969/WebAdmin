@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
 
 .logo {
-  font-family: 'Knewave', cursive;
+  font-family: 'Franklin Gothic Book', cursive;
   letter-spacing: 3px;
+  color: rgb(230, 216, 187);
 }
 
 .fancy-title {
@@ -16,6 +17,9 @@
 
 
 .jello-topbar {
+  background-color: $secondary-color;
+}
+.jello-Topbar {
   background-color: $secondary-color;
 }
 

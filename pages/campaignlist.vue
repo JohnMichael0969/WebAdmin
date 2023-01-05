@@ -1,46 +1,58 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="100">
-        <h2>Campaign List</h2>
-        <v-card>
-          <v-card-title>
-            Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            DriveStart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            DriveEnd</v-card-title>
-          <v-card-text>
-            <v-list>
-              <v-list-item v-for="(Campaigns, index) in Campaigns" :key="index">
-                <v-list-item-title>{{ Campaigns.Title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ Campaigns.Description }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Campaigns.Target }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Campaigns.Location }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Campaigns.DriveStart }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Campaigns.DriveEnd }}</v-list-item-subtitle>
-              </v-list-item>
-            </v-list>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <h2>Campaigns List</h2>
+    <v-data-table :items="Campaigns" :headers="headers" class="elevation-1">
+      <template v-slot:item.Title="{ item }">
+        {{ item.Title}}
+      </template>
+      <template v-slot:item.Description="{ item }">
+        {{ item.Description }}
+      </template>
+      <template v-slot:item.Target="{ item }">
+        {{ item.Target }}
+      </template>
+      <template v-slot:item.Location="{ item }">
+        {{ item.Location }}
+      </template>
+      <template v-slot:item.DriveStart="{ item }">
+        {{ item.DriveStart }}
+      </template>
+      
+      <template v-slot:item.DriveEnd="{ item }">
+        {{ item.DriveEnd }}
+      </template>
+      <template v-slot:item.DatePosted="{ item }">
+        {{ item.DatePosted}}
+      </template>
+
+
+    </v-data-table>
   </v-container>
 </template>
 
 <script>
-import { database } from '~/plugins/firebase'
+import firebase from '~/plugins/firebase'
 
 export default {
-  data() {
+  data () {
     return {
-      Campaigns: []
+      
+Campaigns: [],
+      headers: [
+        { text: 'Title', value: 'Title' },
+        { text: 'Description', value: 'Description' },       
+        { text: 'Target', value: 'Target' },
+        { text: 'Location', value: 'Location' },
+        { text: 'DriveStart', value: 'DriveStart' },
+        { text: 'DriveEnd', value: 'DriveEnd' },
+        { text: 'DatePosted', value: 'DatePosted' },
+        
+      ]
     }
   },
-  created() {
-    database.ref('Campaigns').on('value', snapshot => {
-      this.Campaigns = snapshot.val()
+  created () {
+    firebase.database().ref('Campaigns').on('value', snapshot => {
+      this.Campaigns = Object.values(snapshot.val())
     })
   }
 }

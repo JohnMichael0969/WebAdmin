@@ -17,10 +17,49 @@
               >
                 <v-row no-gutters align="center" justify="center">
                   <nuxt-link to="/">
-                    <v-row no-gutters align="center" justify="center">
-                      <h3 class="logo">Admin Page</h3>
+                    <v-row no-gutters align="Left" justify="center">
+                      <h3 class="logo">Dashboard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
                     </v-row>
                   </nuxt-link>
+                  <nuxt-link to="/notes">
+                    <v-row no-gutters align="Left" justify="center">
+                      <h3 class="logo">Notes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                    </v-row>
+                  </nuxt-link>
+                  <nuxt-link to="/beneficiary">
+            <v-row no-gutters align="left" justify="center">
+              <h3 class="logo">Beneficiaries&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            </v-row>
+          </nuxt-link>
+          <nuxt-link to="/donor">
+            <v-row no-gutters align="left" justify="center">
+              <h3 class="logo">Donors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            </v-row>
+          </nuxt-link>
+          <nuxt-link to="/campaignlist">
+            <v-row no-gutters align="left" justify="Center">
+              <h3 class="logo">Campaigns&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            </v-row>
+          </nuxt-link>
+          <nuxt-link to="/donationlist">
+            <v-row no-gutters align="left" justify="Center">
+              <h3 class="logo">Donations&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            </v-row>
+          </nuxt-link>
+          <nuxt-link to="/notification">
+            <v-row no-gutters align="left" justify="Center">
+              <h3 class="logo">Notifications&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+            </v-row>
+          </nuxt-link>
+
+          <nuxt-link to="/auth/signout">
+            <v-row no-gutters align="left" justify="Center">
+              <v-icon color="#e6d8bb">mdi-exit-to-app</v-icon>
+            </v-row>
+          </nuxt-link>
+          
+          
+
                 </v-row>
               </v-col>
             </v-row>
@@ -47,7 +86,7 @@
                   </div>
                   <div class="d-flex">
                     <nuxt-link to="/">
-                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>My Boards</b>
+                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Notes</b>
                     </nuxt-link>
                   </div>
                     <div class="d-flex">
@@ -64,6 +103,12 @@
                   <div class="d-flex">
                       <nuxt-link to="/donationlist">
                       <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Donation</b>
+                      </nuxt-link>
+                  </div>
+
+                  <div class="d-flex">
+                      <nuxt-link to="/notification">
+                      <v-icon>mdi-view-dashboard-variant-outline</v-icon>&nbsp;&nbsp;<b>Notifications</b>
                       </nuxt-link>
                   </div>
 

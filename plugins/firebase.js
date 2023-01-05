@@ -15,3 +15,4 @@ if (!firebase.apps.length) {
 } 
 
 export const database = firebase.database()
+export default firebase
