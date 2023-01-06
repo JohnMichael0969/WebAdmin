@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-container>
     <h2>Delivery Status</h2>
     <v-data-table :items="Notification" :headers="headers" class="elevation-1">
@@ -18,12 +19,12 @@
       <template v-slot:item.Status="{ item }">
         {{ item.Status }}
   <v-btn @click="updateStatus(item)">Set Status</v-btn>
-</template>
-
+      </template>
       
      
     </v-data-table>
   </v-container>
+</div>
 </template>
 
 <script>

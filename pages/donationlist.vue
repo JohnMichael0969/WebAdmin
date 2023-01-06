@@ -40,10 +40,10 @@ export default {
       headers: [
         { text: 'Title', value: 'Title' },
         { text: 'Description', value: 'Description' },       
-        { text: 'FoodType', value: 'FoodType' },
-        { text: 'FoodExpiry', value: 'FoodExpiry' },
-        { text: 'PickUPDate', value: 'PickUPDate' },
-        { text: 'TransportMethod', value: 'TransportMethod' },
+        { text: 'Food Type', value: 'FoodType' },
+        { text: 'Food Expiry', value: 'FoodExpiry' },
+        { text: 'Pick up Date', value: 'PickUPDate' },
+        { text: 'Transport Method', value: 'TransportMethod' },
         
       ]
     }
