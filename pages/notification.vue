@@ -1,60 +1,63 @@
 <template>
-
   <v-container>
-    <h2>Notifications List</h2>
-    <v-row>
-      <v-col cols="12">
-        <v-card>
-          <v-card-title>&nbsp;&nbsp;&nbsp;
-            Sender&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Status
-            </v-card-title>
-          <v-card-text>
-            <v-list>
-              <v-list-item v-for="(Notification, index) in Notification" :key="index">
-                <v-list-item-title>{{ Notification.Sender }}</v-list-item-title>
-                <v-list-item-subtitle>{{ Notification.Date }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Notification.Target  }}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Notification.Description}}</v-list-item-subtitle>
-                <v-list-item-subtitle>{{ Notification.Status}}</v-list-item-subtitle>
-                <v-btn @click="updateData(Notification)">Update</v-btn>
-              </v-list-item>
-            </v-list>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <h2>Delivery Status</h2>
+    <v-data-table :items="Notification" :headers="headers" class="elevation-1">
+      <template v-slot:item.Sender="{ item }">
+        {{ item.Sender}}
+      </template>
+      <template v-slot:item.Description="{ item }">
+        {{ item.Description }}
+      </template>
+      <template v-slot:item.Target="{ item }">
+        {{ item.Target }}
+      </template>
+      <template v-slot:item.Date="{ item }">
+        {{ item.Date }}
+      </template>
+
+      <template v-slot:item.Status="{ item }">
+        {{ item.Status }}
+  <v-btn @click="updateStatus(item)">Set Status</v-btn>
+</template>
+
+      
+     
+    </v-data-table>
   </v-container>
 </template>
 
 <script>
-import { database } from '~/plugins/firebase'
+import firebase from '~/plugins/firebase'
 
 export default {
-  data() {
+  data () {
     return {
-      Notification: []
+      
+Notification: [],
+      headers: [
+        { text: 'Sender', value: 'Sender' },
+        { text: 'Description', value: 'Description' },       
+        { text: 'Target', value: 'Target' },
+        { text: 'Date', value: 'Date' },
+        { text: 'Status', value: 'Status' }
+      ]
     }
   },
-  created() {
-    database.ref('Notification').on('value', snapshot => {
-      this.Notification = snapshot.val()
+  created () {
+    firebase.database().ref('Notification').on('value', snapshot => {
+      this.Notification = Object.values(snapshot.val())
     })
-  }, 
+  },
   methods: {
-    async updateData(notification) {
-      // Get a reference to the Realtime Database
-      const db = firebase.database()
-
-      // Update the notification object in the database
-      await db.ref(`Notification/${notification.id}`).update({
-        Status: 'Delivered',
-      })
-    },
+  updateStatus(Notification) {
+    const ref = firebase.database().ref(`Notification/${Notification.id}`)
+    Notification.status = Notification.status === 'To be Delivered' ? 'To be Picked up' : 'Delivered'
+    ref.update({ status: Notification.status }, error => {
+      if (error) {
+        console.log(error)
+      }
+    })
   }
 }
+}
 </script>
-

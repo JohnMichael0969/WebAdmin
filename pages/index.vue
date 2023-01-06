@@ -1,25 +1,44 @@
 <template>
   <div>
-    Total number of users: {{ Persons }}
+    Number of Donors: {{ Persons }}<br>
+    Number of Campaigns: {{ Campaigns }}<br>
+    Number of Donations: {{ Donation }}<br>
+    <!--Number of Beneficiaries: {{ beneficiaries }}-->
   </div>
 </template>
 
 <script>
-import firebase from 'firebase/app'
-import 'firebase/database'
+import firebase from 'firebase'
 
 export default {
-  data () {
+  data() {
     return {
-      Persons: [],
-      Persons: 0
+      Persons: 0,
+      Campaigns: 0,
+      Donation: 0,
+      //beneficiaries: 0
     }
   },
-  created () {
-    firebase.database().ref('Persons').on('value', snapshot => {
-      this.Persons = snapshot.val()
-      this.Persons = this.Persons.length
+  created() {
+    // Set up references to the four nodes
+    const PersonsRef = firebase.database().ref('Persons')
+    const CampaignsRef = firebase.database().ref('Campaigns')
+    const DonationRef = firebase.database().ref('Donation')
+    //const beneficiariesRef = firebase.database().ref('beneficiaries')
+
+    // Listen for changes to the data in each node
+    PersonsRef.on('value', snapshot => {
+      this.Persons = snapshot.numChildren()
     })
+    CampaignsRef.on('value', snapshot => {
+      this.Campaigns = snapshot.numChildren()
+    })
+    DonationRef.on('value', snapshot => {
+      this.Donation = snapshot.numChildren()
+    })
+   // beneficiariesRef.on('value', snapshot => {
+    //  this.beneficiaries = snapshot.numChildren()
+   // })
   }
 }
 </script>
